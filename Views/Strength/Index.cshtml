@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "Calculate your strength by Wilks";
+}
+<h2>Calculate your strength by Wilks</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6">
+            <p>The Wilks Coefficient or Wilks Formula is a coefficient that can be used to measure the strength of a powerlifter against other powerlifters despite the different weights of the lifters.</p>
+            <h4>Equation</h4>
+            <p>The total weight lifted is multiplied by the Coefficient to find the standard amount lifted normalised across all body weights.</p>
+            <h4>Validity</h4>
+            <p>One journal article has been written on the topic of Wilks formula validation.<sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup> Based on the men's and women's world record holders and the top two performers for each event in the IPF's 1996 and 1997 World Championships (a total of 30 men and 27 women for each lift), it concluded:</p>
+            <ul>
+                <li>There is no bias for men's or women's bench press and total.</li>
+                <li>There is a favorable bias toward intermediate weight class lifters in the women's squat with no bias for men's squat.</li>
+                <li>There is a linear unfavorable bias toward heavier men and women in the deadlift.</li>
+            </ul>
+        </div>
+        <div class="col-lg-6">
+            @model refactorme.Models.StrengthData
+            @using (Html.BeginForm("Result", "Strength", FormMethod.Post))
+            {
+                <div class="form-group">
+                    <label for="bodyWeight">Body Weight (kg):</label>
+                    @Html.TextBoxFor(m => m.BodyWeight,
+                    null,
+                    new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="bodyWeight">Weight Lifted (kg):</label>
+                    @Html.TextBoxFor(m => m.WeightLifted,
+                    null,
+                    new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="bodyWeight">Your gender:</label>
+                    @Html.DropDownList("Gender",
+                    new SelectList(Enum.GetValues(typeof(GenderOptions))),
+                    "Select Gender",
+                    new { @class = "form-control" })
+                </div>
+                <br/>
+                <button type="submit" class="btn btn-primary btn-lg btn-block">Calculate Strength</button>
+            }
+        </div>
+    </div>
+</div>
